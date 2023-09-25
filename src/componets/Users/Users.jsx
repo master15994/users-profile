@@ -4,7 +4,7 @@ import User from './User'
 
 
 
-export const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) => {
+export const Users = ({ items, isLoading, searchValue, onChangeSearchValue, onClickSendInvites, invites, onClickInvite }) => {
     return (
         <>
             <div className="search">
@@ -21,7 +21,6 @@ export const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) =>
                 </div>
             ) : (
                 <ul className="users-list">
-
                     {
                         items
                             .filter((obj) => {
@@ -30,16 +29,27 @@ export const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) =>
                                 return fullName.toLowerCase().includes(searchValue.toLowerCase()) ||
                                     obj.email.toLowerCase().includes(searchValue.toLowerCase());
                             })
-
-
                             .map(obj =>
-                                (<User key={obj.id} {...obj} />)
+                            (<User
+                                isInvited={invites.includes(obj.id)}
+                                onClickInvite={onClickInvite}
+                                key={obj.id}
+                                {...obj}
+                            />)
                             )
                     }
 
                 </ul>
             )}
-            <button className="send-invite-btn">Отправить приглашение</button>
+
+            {
+                invites.length > 0 && (
+                    <button onClick={onClickSendInvites} className="send-invite-btn">Отправить приглашение</button>
+
+                )
+            }
+
+
         </>
     );
 };
