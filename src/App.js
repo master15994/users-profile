@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './index.scss'
 
-function App() {
+import { Success } from './componets/Users/Success';
+import { Users } from './componets/Users/Users';
+
+// Тут список пользователей: https://reqres.in/api/users
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div
+      className="App" >
+      < Users />
+
+      <Success />
+
+    </div>);
 }
 
 export default App;
